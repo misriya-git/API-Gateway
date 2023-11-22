@@ -1,0 +1,21 @@
+server:
+  port: 8088
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: customer_route
+          uri: http://localhost:8086
+          predicates:
+            - Path=/customers/**
+        - id: order_route
+          uri: http://localhost:8089
+          predicates:
+            - Path=/orders/**
